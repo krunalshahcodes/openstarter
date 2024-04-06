@@ -5,11 +5,13 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "db:push": "turbo db:push",
+    "db:generate": "turbo db:generate"
   },
   "devDependencies": {
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
+    "@openstarter/eslint-config": "workspace:*",
+    "@openstarter/typescript-config": "workspace:*",
     "prettier": "^3.2.5",
     "turbo": "latest"
   },
