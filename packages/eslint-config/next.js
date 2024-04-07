@@ -30,6 +30,7 @@ module.exports = {
     // Ignore dotfiles
     ".*.js",
     "node_modules/",
+    "types",
   ],
   overrides: [{ files: ["*.js?(x)", "*.ts?(x)"] }],
 };
