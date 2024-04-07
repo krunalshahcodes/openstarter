@@ -1,6 +1,12 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "NEXTAUTH_SECRET",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+    "DATABASE_URL"
+  ],
   "pipeline": {
     "build": {
       "dependsOn": ["^build", "^db:generate"],
@@ -18,6 +24,9 @@
       "cache": false
     },
     "db:push": {
+      "cache": false
+    },
+    "db:seed": {
       "cache": false
     }
   }
