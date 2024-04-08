@@ -5,7 +5,9 @@
     "NEXTAUTH_SECRET",
     "GOOGLE_CLIENT_ID",
     "GOOGLE_CLIENT_SECRET",
-    "DATABASE_URL"
+    "DATABASE_URL",
+    "EMAIL_FROM",
+    "RESEND_API_KEY"
   ],
   "pipeline": {
     "build": {

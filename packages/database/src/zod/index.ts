@@ -85,7 +85,7 @@ export type User = z.infer<typeof UserSchema>
 export const VerificationTokenSchema = z.object({
   identifier: z.string(),
   token: z.string(),
-  expires: z.coerce.date(),
+  expires: z.coerce.date().nullable(),
 })
 
 export type VerificationToken = z.infer<typeof VerificationTokenSchema>
@@ -439,13 +439,13 @@ export const VerificationTokenWhereInputSchema: z.ZodType<Prisma.VerificationTok
   NOT: z.union([ z.lazy(() => VerificationTokenWhereInputSchema),z.lazy(() => VerificationTokenWhereInputSchema).array() ]).optional(),
   identifier: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   token: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  expires: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  expires: z.union([ z.lazy(() => DateTimeNullableFilterSchema),z.coerce.date() ]).optional().nullable(),
 }).strict();
 
 export const VerificationTokenOrderByWithRelationInputSchema: z.ZodType<Prisma.VerificationTokenOrderByWithRelationInput> = z.object({
   identifier: z.lazy(() => SortOrderSchema).optional(),
   token: z.lazy(() => SortOrderSchema).optional(),
-  expires: z.lazy(() => SortOrderSchema).optional()
+  expires: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
 }).strict();
 
 export const VerificationTokenWhereUniqueInputSchema: z.ZodType<Prisma.VerificationTokenWhereUniqueInput> = z.union([
@@ -467,13 +467,13 @@ export const VerificationTokenWhereUniqueInputSchema: z.ZodType<Prisma.Verificat
   OR: z.lazy(() => VerificationTokenWhereInputSchema).array().optional(),
   NOT: z.union([ z.lazy(() => VerificationTokenWhereInputSchema),z.lazy(() => VerificationTokenWhereInputSchema).array() ]).optional(),
   identifier: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  expires: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  expires: z.union([ z.lazy(() => DateTimeNullableFilterSchema),z.coerce.date() ]).optional().nullable(),
 }).strict());
 
 export const VerificationTokenOrderByWithAggregationInputSchema: z.ZodType<Prisma.VerificationTokenOrderByWithAggregationInput> = z.object({
   identifier: z.lazy(() => SortOrderSchema).optional(),
   token: z.lazy(() => SortOrderSchema).optional(),
-  expires: z.lazy(() => SortOrderSchema).optional(),
+  expires: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   _count: z.lazy(() => VerificationTokenCountOrderByAggregateInputSchema).optional(),
   _max: z.lazy(() => VerificationTokenMaxOrderByAggregateInputSchema).optional(),
   _min: z.lazy(() => VerificationTokenMinOrderByAggregateInputSchema).optional()
@@ -485,7 +485,7 @@ export const VerificationTokenScalarWhereWithAggregatesInputSchema: z.ZodType<Pr
   NOT: z.union([ z.lazy(() => VerificationTokenScalarWhereWithAggregatesInputSchema),z.lazy(() => VerificationTokenScalarWhereWithAggregatesInputSchema).array() ]).optional(),
   identifier: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   token: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
-  expires: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
+  expires: z.union([ z.lazy(() => DateTimeNullableWithAggregatesFilterSchema),z.coerce.date() ]).optional().nullable(),
 }).strict();
 
 export const AccountCreateInputSchema: z.ZodType<Prisma.AccountCreateInput> = z.object({
@@ -714,43 +714,43 @@ export const UserUncheckedUpdateManyInputSchema: z.ZodType<Prisma.UserUncheckedU
 export const VerificationTokenCreateInputSchema: z.ZodType<Prisma.VerificationTokenCreateInput> = z.object({
   identifier: z.string(),
   token: z.string(),
-  expires: z.coerce.date()
+  expires: z.coerce.date().optional().nullable()
 }).strict();
 
 export const VerificationTokenUncheckedCreateInputSchema: z.ZodType<Prisma.VerificationTokenUncheckedCreateInput> = z.object({
   identifier: z.string(),
   token: z.string(),
-  expires: z.coerce.date()
+  expires: z.coerce.date().optional().nullable()
 }).strict();
 
 export const VerificationTokenUpdateInputSchema: z.ZodType<Prisma.VerificationTokenUpdateInput> = z.object({
   identifier: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   token: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  expires: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  expires: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const VerificationTokenUncheckedUpdateInputSchema: z.ZodType<Prisma.VerificationTokenUncheckedUpdateInput> = z.object({
   identifier: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   token: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  expires: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  expires: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const VerificationTokenCreateManyInputSchema: z.ZodType<Prisma.VerificationTokenCreateManyInput> = z.object({
   identifier: z.string(),
   token: z.string(),
-  expires: z.coerce.date()
+  expires: z.coerce.date().optional().nullable()
 }).strict();
 
 export const VerificationTokenUpdateManyMutationInputSchema: z.ZodType<Prisma.VerificationTokenUpdateManyMutationInput> = z.object({
   identifier: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   token: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  expires: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  expires: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const VerificationTokenUncheckedUpdateManyInputSchema: z.ZodType<Prisma.VerificationTokenUncheckedUpdateManyInput> = z.object({
   identifier: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   token: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  expires: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  expires: z.union([ z.coerce.date(),z.lazy(() => NullableDateTimeFieldUpdateOperationsInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const StringFilterSchema: z.ZodType<Prisma.StringFilter> = z.object({

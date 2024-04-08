@@ -1,4 +1,4 @@
-import LoginForm from "@/components/auth/login-form";
+import RegisterForm from "@/components/auth/register-form";
 import { getCurrentUser } from "@/lib/session";
 import {
   Card,
@@ -10,7 +10,7 @@ import {
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-const Login = async () => {
+const Register = async () => {
   const user = await getCurrentUser();
   if (user) {
     return redirect("/");
@@ -18,19 +18,19 @@ const Login = async () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center flex-col">
-      <Card className="mx-auto max-w-sm w-full">
+      <Card className="mx-auto max-w-md w-full">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
+          <CardTitle className="text-2xl">Register</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Enter your information to create an account
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <LoginForm />
+          <RegisterForm />
           <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <Link href="/register" className="underline">
-              Sign up
+            Already have an account?{" "}
+            <Link href="/login" className="underline">
+              Sign in
             </Link>
           </div>
         </CardContent>
@@ -39,4 +39,4 @@ const Login = async () => {
   );
 };
 
-export default Login;
+export default Register;

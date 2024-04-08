@@ -38,6 +38,10 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Password is not setup for this account");
         }
 
+        if (!user.emailVerified) {
+          throw new Error("Email verification pending");
+        }
+
         const isPasswordMatching = await bcrypt.compare(
           credentials.password,
           user.password,
