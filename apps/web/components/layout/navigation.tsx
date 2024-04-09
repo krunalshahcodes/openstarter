@@ -1,6 +1,6 @@
 "use client";
 
-import { Sheet, SheetContent, SheetTrigger } from "@openstarter/ui";
+import { Sheet, SheetContent } from "@openstarter/ui";
 import Link from "next/link";
 import { useState } from "react";
 import { LuMenu, LuRocket } from "react-icons/lu";
