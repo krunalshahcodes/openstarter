@@ -80,4 +80,7 @@
       "rlig" 1,
       "calt" 1;
   }
+  html {
+    @apply scroll-smooth;
+  }
 }
