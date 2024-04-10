@@ -1,9 +1,19 @@
 "use client";
 
-import { Sheet, SheetContent } from "@openstarter/ui";
+import {
+  Button,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  Sheet,
+  SheetContent,
+} from "@openstarter/ui";
+import { signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { LuMenu, LuRocket } from "react-icons/lu";
+import { LuLogOut, LuMenu, LuRocket } from "react-icons/lu";
 
 const navItems = [
   {
@@ -18,6 +28,8 @@ const navItems = [
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const { data: session, status } = useSession();
+  const handleLogout = async () => await signOut();
 
   return (
     <header className="absolute inset-x-0 top-0 z-50">
@@ -50,16 +62,49 @@ const Navigation = () => {
           ))}
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Link
-            href="/login"
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Login
-          </Link>
+          {status !== "loading" && !session?.user && (
+            <Link
+              href="/login"
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              Login
+            </Link>
+          )}
+          {status !== "loading" && session?.user && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="rounded-full bg-gray-300 w-10 h-10 hover:bg-gray-300/80"
+                >
+                  {session.user.image ? (
+                    <Image
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      src={session.user.image}
+                      alt={session.user.name || ""}
+                    />
+                  ) : (
+                    <span>{session.user.name?.charAt(0)}</span>
+                  )}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className="text-red-600"
+                >
+                  <LuLogOut className="w-4 h-4 mr-2" />
+                  <span>Logout</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
       </nav>
       <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-        <SheetContent side="top" className="lg:hidden">
+        <SheetContent side="left" className="lg:hidden">
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-1">
               <LuRocket className="w-6 h-6" />
@@ -80,12 +125,45 @@ const Navigation = () => {
                 ))}
               </div>
               <div className="py-6">
-                <Link
-                  href="/login"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                >
-                  Login
-                </Link>
+                {status !== "loading" && !session?.user && (
+                  <Link
+                    href="/login"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    Login
+                  </Link>
+                )}{" "}
+                {status !== "loading" && session?.user && (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        className="rounded-full bg-gray-300 w-10 h-10 hover:bg-gray-300/80"
+                      >
+                        {session.user.image ? (
+                          <Image
+                            width={0}
+                            height={0}
+                            sizes="100vw"
+                            src={session.user.image}
+                            alt={session.user.name || ""}
+                          />
+                        ) : (
+                          <span>{session.user.name?.charAt(0)}</span>
+                        )}
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="start">
+                      <DropdownMenuItem
+                        onClick={handleLogout}
+                        className="text-red-600"
+                      >
+                        <LuLogOut className="w-4 h-4 mr-2" />
+                        <span>Logout</span>
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                )}
               </div>
             </div>
           </div>
